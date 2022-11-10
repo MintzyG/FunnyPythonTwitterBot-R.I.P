@@ -1,5 +1,4 @@
 import tweepy
-import time
 import config as cfg
 
 auth = tweepy.OAuthHandler(cfg.apiKey, cfg.apiSecret)
@@ -7,7 +6,7 @@ auth.set_access_token(cfg.accAccessToken, cfg. accAccessTSecret)
 api = tweepy.API(auth, wait_on_rate_limit=True)
 
 # Twitter API limit for likes per day is a 1000, be careful
-limit = 998
+limit = 2500
 
 # Just funny to look at a counter, prints to console
 i = 1
@@ -23,5 +22,5 @@ for tweet in tweepy.Cursor(api.user_timeline, screen_name = cfg.userTarget, excl
     api.create_favorite(id = tweet.id)
     
     # Safeguard
-    if (i >= 3):
+    if (i > 900):
         break
